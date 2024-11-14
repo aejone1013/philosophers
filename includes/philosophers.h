@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/18 07:19:46 by okoca             #+#    #+#             */
-/*   Updated: 2024/06/24 09:10:51 by okoca            ###   ########.fr       */
+/*   Created: 2024/11/13 16:46:11 by jaoh              #+#    #+#             */
+/*   Updated: 2024/11/13 16:46:15 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define FALSE 0
 
 # define DEATH 1
-# define SATIATED 2
+# define FULL 2
 
 typedef pthread_mutex_t	t_mutex;
 typedef enum e_action
@@ -67,37 +67,37 @@ typedef struct s_philo
 
 int			ft_atoi(const char *str);
 
-long long	pl_get_time(void);
+long long	philo_get_time(void);
 
-int			pl_parse_args(int ac, char **av);
+int			philo_parse_args(int ac, char **av);
 
-int			pl_init_data(t_data *data, int ac, char **av);
+int			philo_init_data(t_data *data, int ac, char **av);
 
-int			pl_init_mutexes(t_data *data);
+int			philo_init_mutexes(t_data *data);
 
-int			pl_destroy_mutexes(t_data *data);
+int			philo_destroy_mutexes(t_data *data);
 
-int			pl_start_philos(t_data *data);
+int			philo_start_philos(t_data *data);
 
-int			pl_init_philos(t_data *data, t_philo *philos);
+int			philo_init_philos(t_data *data, t_philo *philos);
 
-int			pl_join_philos(t_data *data, t_philo *philos);
+int			philo_join_philos(t_data *data, t_philo *philos);
 
-int			pl_handle_single_philo(t_data *data);
+int			philo_handle_single_philo(t_data *data);
 
-void		*pl_action(void *arg);
+void		*philo_action(void *arg);
 
-int			pl_eat_action(t_philo *philo);
+int			philo_eat_action(t_philo *philo);
 
-int			pl_track_philos( t_data *data, t_philo *philos);
+int			philo_track_philos( t_data *data, t_philo *philos);
 
-int			pl_log(t_philo *philo, t_action action);
+int			philo_log(t_philo *philo, t_action action);
 
-int			pl_end_check(t_philo *philo);
+int			philo_end_check(t_philo *philo);
 
-int			pl_lock_fork_mutexes(t_philo *philo);
+int			philo_lock_fork_mutexes(t_philo *philo);
 
-int			pl_unlock_fork_mutexes(t_philo *philo);
+int			philo_unlock_fork_mutexes(t_philo *philo);
 
 int			ft_sleep(t_data *data, int time);
 

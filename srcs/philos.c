@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   philos.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/19 16:26:01 by okoca             #+#    #+#             */
-/*   Updated: 2024/06/22 14:37:59 by okoca            ###   ########.fr       */
+/*   Created: 2024/11/13 16:46:19 by jaoh              #+#    #+#             */
+/*   Updated: 2024/11/13 16:46:20 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	pl_init_philos(t_data *data, t_philo *philos)
+int	philo_init_philos(t_data *data, t_philo *philos)
 {
 	int		i;
 
@@ -29,19 +29,19 @@ int	pl_init_philos(t_data *data, t_philo *philos)
 		philos[i].data = data;
 		philos[i].dead = 0;
 		philos[i].id = i + 1;
-		philos[i].last_eaten = pl_get_time();
+		philos[i].last_eaten = philo_get_time();
 		philos[i].meal_remaining = data->maximum_meal;
 		philos[i].left_fork = &(data->forks[i]);
 		philos[i].right_fork = &(data->forks[(i + 1) % data->nb_philo]);
 		if (pthread_create(&(philos[i].thread_id),
-				NULL, pl_action, &(philos[i])) != 0)
+				NULL, philo_action, &(philos[i])) != 0)
 			return (1);
 		i++;
 	}
 	return (1);
 }
 
-int	pl_join_philos(t_data *data, t_philo *philos)
+int	philo_join_philos(t_data *data, t_philo *philos)
 {
 	int	i;
 
@@ -62,14 +62,14 @@ int	pl_join_philos(t_data *data, t_philo *philos)
 	return (0);
 }
 
-int	pl_handle_single_philo(t_data *data)
+int	philo_handle_single_philo(t_data *data)
 {
 	if (data->nb_philo == 1)
 	{
 		printf("%lld %d has taken a fork\n",
-			pl_get_time() - data->start_time, 1);
+			philo_get_time() - data->start_time, 1);
 		usleep(1000 * data->time_to_die);
-		printf("%lld %d died\n", pl_get_time() - data->start_time, 1);
+		printf("%lld %d died\n", philo_get_time() - data->start_time, 1);
 		return (1);
 	}
 	return (0);

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/18 20:12:15 by okoca             #+#    #+#             */
-/*   Updated: 2024/06/25 12:57:42 by okoca            ###   ########.fr       */
+/*   Created: 2024/11/13 16:46:30 by jaoh              #+#    #+#             */
+/*   Updated: 2024/11/13 16:46:30 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-long long	pl_get_time(void)
+long long	philo_get_time(void)
 {
 	struct timeval	tv;
 
@@ -20,7 +20,7 @@ long long	pl_get_time(void)
 	return ((tv.tv_sec) * (long long)1000 + (tv.tv_usec) / 1000);
 }
 
-int	pl_parse_args(int ac, char **av)
+int	philo_parse_args(int ac, char **av)
 {
 	int	i;
 
@@ -73,7 +73,7 @@ int	ft_atoi(const char *str)
 	return (result * sign);
 }
 
-int	pl_end_check(t_philo *philo)
+int	philo_end_check(t_philo *philo)
 {
 	pthread_mutex_lock(&(philo->data->end_mutex));
 	if (philo->data->should_end == 1)
@@ -89,8 +89,8 @@ int	ft_sleep(t_data *data, int time)
 {
 	long long	first;
 
-	first = pl_get_time();
-	while (pl_get_time() - first <= time)
+	first = philo_get_time();
+	while (philo_get_time() - first <= time)
 	{
 		pthread_mutex_lock(&(data->end_mutex));
 		if (data->should_end == 1)
