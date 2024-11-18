@@ -6,13 +6,13 @@
 /*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 16:46:41 by jaoh              #+#    #+#             */
-/*   Updated: 2024/11/13 16:46:42 by jaoh             ###   ########.fr       */
+/*   Updated: 2024/11/14 21:08:11 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	philo_init_data(t_data *data, int ac, char **av)
+int	p_init_data(t_data *data, int ac, char **av)
 {
 	t_data	new;
 
@@ -20,17 +20,17 @@ int	philo_init_data(t_data *data, int ac, char **av)
 	new.time_to_die = ft_atoi(av[2]);
 	new.time_to_eat = ft_atoi(av[3]);
 	new.time_to_sleep = ft_atoi(av[4]);
-	new.start_time = philo_get_time();
-	new.should_end = 0;
+	new.start_time = p_get_time();
+	new.have_to_end = 0;
 	new.end_reason = 0;
-	new.maximum_meal = -1;
+	new.max_meal = -1;
 	if (ac == 6)
-		new.maximum_meal = ft_atoi(av[5]);
+		new.max_meal = ft_atoi(av[5]);
 	*data = new;
 	return (0);
 }
 
-int	philo_init_mutexes(t_data *data)
+int	p_init_mutexes(t_data *data)
 {
 	int	i;
 
@@ -48,7 +48,7 @@ int	philo_init_mutexes(t_data *data)
 	return (0);
 }
 
-int	philo_destroy_mutexes(t_data *data)
+int	p_destroy_mutexes(t_data *data)
 {
 	int	i;
 

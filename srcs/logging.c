@@ -6,7 +6,7 @@
 /*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 16:46:36 by jaoh              #+#    #+#             */
-/*   Updated: 2024/11/13 16:46:37 by jaoh             ###   ########.fr       */
+/*   Updated: 2024/11/14 21:08:11 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ int	pl_log_util(long long start_t, int id, t_action action)
 	return (0);
 }
 
-int	philo_log(t_philo *philo, t_action action)
+int	p_log(t_philo *philo, t_action action)
 {
 	int	end;
 
 	end = 0;
 	pthread_mutex_lock(&(philo->meal_mutex));
-	if (philo->data->maximum_meal == 0)
+	if (philo->data->max_meal == 0)
 	{
 		pthread_mutex_unlock(&(philo->meal_mutex));
 		return (0);
@@ -40,13 +40,13 @@ int	philo_log(t_philo *philo, t_action action)
 	pthread_mutex_lock(&(philo->data->log_mutex));
 	if (action == DIED)
 		printf("%lld %d died\n",
-			philo_get_time() - philo->data->start_time, philo->id);
+			p_get_time() - philo->data->start_time, philo->id);
 	pthread_mutex_lock(&(philo->data->end_mutex));
-	if (philo->data->should_end == 1)
+	if (philo->data->have_to_end == 1)
 		end = 1;
 	pthread_mutex_unlock(&(philo->data->end_mutex));
 	if (end != 1)
-		pl_log_util(philo_get_time() - philo->data->start_time, philo->id, action);
+		pl_log_util(p_get_time() - philo->data->start_time, philo->id, action);
 	pthread_mutex_unlock(&(philo->data->log_mutex));
 	return (0);
 }

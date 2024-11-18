@@ -6,7 +6,7 @@
 /*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 16:46:24 by jaoh              #+#    #+#             */
-/*   Updated: 2024/11/13 16:46:25 by jaoh             ###   ########.fr       */
+/*   Updated: 2024/11/14 21:05:16 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ int	main(int ac, char **av)
 {
 	t_data	data;
 
-	if (philo_parse_args(ac, av) != 0)
+	if (p_parse_args(ac, av) != 0)
 		return (1);
-	philo_init_data(&data, ac, av);
-	philo_init_mutexes(&data);
-	philo_start_philos(&data);
-	philo_destroy_mutexes(&data);
+	p_init_data(&data, ac, av);
+	p_init_mutexes(&data);
+	p_start_philos(&data);
+	p_destroy_mutexes(&data);
 }

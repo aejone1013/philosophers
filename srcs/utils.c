@@ -6,13 +6,13 @@
 /*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 16:46:30 by jaoh              #+#    #+#             */
-/*   Updated: 2024/11/13 16:46:30 by jaoh             ###   ########.fr       */
+/*   Updated: 2024/11/14 21:06:48 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-long long	philo_get_time(void)
+long long	p_get_time(void)
 {
 	struct timeval	tv;
 
@@ -20,7 +20,7 @@ long long	philo_get_time(void)
 	return ((tv.tv_sec) * (long long)1000 + (tv.tv_usec) / 1000);
 }
 
-int	philo_parse_args(int ac, char **av)
+int	p_parse_args(int ac, char **av)
 {
 	int	i;
 
@@ -35,14 +35,14 @@ int	philo_parse_args(int ac, char **av)
 	{
 		if (ft_atoi(av[i + 1]) <= 0)
 		{
-			printf("only positive numbers please.\n");
+			printf("Only positive numbers.\n");
 			return (1);
 		}
 		i++;
 	}
 	if (ft_atoi(av[1]) > 200)
 	{
-		printf("no more than 200 philos please.\n");
+		printf("No more than 200 philosophers.\n");
 		return (1);
 	}
 	return (0);
@@ -67,16 +67,16 @@ int	ft_atoi(const char *str)
 	}
 	while (str[i] >= '0' && str[i] <= '9')
 	{
-		result = (result * 10) + (str[i] - '0');
+		result = result * 10 + (str[i] - '0');
 		i++;
 	}
-	return (result * sign);
+	return (sign * result);
 }
 
-int	philo_end_check(t_philo *philo)
+int	p_end_check(t_philo *philo)
 {
 	pthread_mutex_lock(&(philo->data->end_mutex));
-	if (philo->data->should_end == 1)
+	if (philo->data->have_to_end == 1)
 	{
 		pthread_mutex_unlock(&(philo->data->end_mutex));
 		return (1);
@@ -85,15 +85,15 @@ int	philo_end_check(t_philo *philo)
 	return (0);
 }
 
-int	ft_sleep(t_data *data, int time)
+int	p_sleep(t_data *data, int time)
 {
-	long long	first;
+	long long	start;
 
-	first = philo_get_time();
-	while (philo_get_time() - first <= time)
+	start = p_get_time();
+	while (p_get_time() - start <= time)
 	{
 		pthread_mutex_lock(&(data->end_mutex));
-		if (data->should_end == 1)
+		if (data->have_to_end == 1)
 		{
 			pthread_mutex_unlock(&(data->end_mutex));
 			break ;
@@ -103,3 +103,4 @@ int	ft_sleep(t_data *data, int time)
 	}
 	return (0);
 }
+	
