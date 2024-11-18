@@ -6,7 +6,7 @@
 /*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 16:46:49 by jaoh              #+#    #+#             */
-/*   Updated: 2024/11/18 15:37:32 by jaoh             ###   ########.fr       */
+/*   Updated: 2024/11/18 16:37:00 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 int	p_sleep_action(t_philo *philo)
 {
-	p_log(philo, SLEEP);
+	p_log_action(philo, SLEEP);
 	p_sleep(philo->data, philo->data->time_to_sleep);
 	return (0);
 }
 
 int	p_think_action(t_philo *philo)
 {
-	p_log(philo, THINK);
+	p_log_action(philo, THINK);
 	return (0);
 }
 
 int	p_eat_action(t_philo *philo)
 {
-	p_lock_fork_mutexes(philo);
-	p_log(philo, EAT);
+	p_release_forks(philo);
+	p_log_action(philo, EAT);
 	pthread_mutex_lock(&(philo->meal_mutex));
 	philo->last_eaten = p_get_time();
 	pthread_mutex_unlock(&(philo->meal_mutex));
@@ -36,7 +36,7 @@ int	p_eat_action(t_philo *philo)
 	pthread_mutex_lock(&(philo->meal_mutex));
 	philo->meal_remaining -= 1;
 	pthread_mutex_unlock(&(philo->meal_mutex));
-	p_unlock_fork_mutexe(philo);
+	p_release_forks(philo);
 	return (0);
 }
 
@@ -49,17 +49,17 @@ void	*p_philo_action(void *arg)
 	{
 		if (philo->id % 2 == 0)
 			usleep(1000);
-		if (p_end_check(philo) == 1 || philo->meal_remaining == 0)
+		if (p_check_end_condition(philo) == 1 || philo->meal_remaining == 0)
 			break ;
 		p_eat_action(philo);
-		if (p_end_check(philo) == 1 || philo->meal_remaining == 0)
+		if (p_check_end_condition(philo) == 1 || philo->meal_remaining == 0)
 			break ;
 		p_sleep_action(philo);
-		if (p_end_check(philo) == 1 || philo->meal_remaining == 0)
+		if (p_check_end_condition(philo) == 1 || philo->meal_remaining == 0)
 			break ;
 		p_think_action(philo);
 	}
 	if (philo->dead == 1)
-		p_log(philo, DIED);
+		p_log_action(philo, DIED);
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 16:46:30 by jaoh              #+#    #+#             */
-/*   Updated: 2024/11/14 21:06:48 by jaoh             ###   ########.fr       */
+/*   Updated: 2024/11/18 16:47:40 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	ft_atoi(const char *str)
 	return (sign * result);
 }
 
-int	p_end_check(t_philo *philo)
+int	p_check_end_condition(t_philo *philo)
 {
 	pthread_mutex_lock(&(philo->data->end_mutex));
 	if (philo->data->have_to_end == 1)

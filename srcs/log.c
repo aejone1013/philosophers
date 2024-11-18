@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   logging.c                                          :+:      :+:    :+:   */
+/*   log.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 16:46:36 by jaoh              #+#    #+#             */
-/*   Updated: 2024/11/14 21:08:11 by jaoh             ###   ########.fr       */
+/*   Updated: 2024/11/18 16:40:04 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	pl_log_util(long long start_t, int id, t_action action)
+int	p_print_log_message(long long start_t, int id, t_action action)
 {
 	if (action == SLEEP)
 		printf("%lld %d is sleeping\n", start_t, id);
@@ -25,7 +25,7 @@ int	pl_log_util(long long start_t, int id, t_action action)
 	return (0);
 }
 
-int	p_log(t_philo *philo, t_action action)
+int	p_log_action(t_philo *philo, t_action action)
 {
 	int	end;
 
@@ -46,7 +46,7 @@ int	p_log(t_philo *philo, t_action action)
 		end = 1;
 	pthread_mutex_unlock(&(philo->data->end_mutex));
 	if (end != 1)
-		pl_log_util(p_get_time() - philo->data->start_time, philo->id, action);
+		p_print_log_message(p_get_time() - philo->data->start_time, philo->id, action);
 	pthread_mutex_unlock(&(philo->data->log_mutex));
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 16:46:41 by jaoh              #+#    #+#             */
-/*   Updated: 2024/11/14 21:08:11 by jaoh             ###   ########.fr       */
+/*   Updated: 2024/11/18 16:38:34 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	p_init_data(t_data *data, int ac, char **av)
 	return (0);
 }
 
-int	p_init_mutexes(t_data *data)
+int	p_setup_mutexes(t_data *data)
 {
 	int	i;
 
@@ -48,7 +48,7 @@ int	p_init_mutexes(t_data *data)
 	return (0);
 }
 
-int	p_destroy_mutexes(t_data *data)
+int	p_cleanup_mutexes(t_data *data)
 {
 	int	i;
 

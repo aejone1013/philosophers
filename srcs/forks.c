@@ -6,22 +6,22 @@
 /*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 16:46:54 by jaoh              #+#    #+#             */
-/*   Updated: 2024/11/14 21:07:23 by jaoh             ###   ########.fr       */
+/*   Updated: 2024/11/18 16:36:43 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	p_lock_fork_mutexes(t_philo *philo)
+int	p_release_forks(t_philo *philo)
 {
 	pthread_mutex_lock(philo->left_fork);
-	p_log(philo, FORK);
+	p_log_action(philo, FORK);
 	pthread_mutex_lock(philo->right_fork);
-	p_log(philo, FORK);
+	p_log_action(philo, FORK);
 	return (0);
 }
 
-int	p_unlock_fork_mutexe(t_philo *philo)
+int	p_release_forks(t_philo *philo)
 {
 	pthread_mutex_unlock(philo->left_fork);
 	pthread_mutex_unlock(philo->right_fork);
