@@ -6,7 +6,7 @@
 /*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 16:46:11 by jaoh              #+#    #+#             */
-/*   Updated: 2024/11/19 21:40:27 by jaoh             ###   ########.fr       */
+/*   Updated: 2024/11/19 22:57:04 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@
 
 # define TRUE 1
 # define FALSE 0
-
 # define DEATH 1
 # define FULL 2
 
 typedef pthread_mutex_t	t_mutex;
+
 typedef enum e_action
 {
 	FORK,
@@ -34,10 +34,9 @@ typedef enum e_action
 	SLEEP,
 	THINK,
 	DIED,
-	SATISFIED,
 }	t_action;
 
-typedef struct s_data
+typedef struct s_general
 {
 	int				nb_philo;
 	int				time_to_eat;
@@ -50,7 +49,7 @@ typedef struct s_data
 	t_mutex			log_mutex;
 	t_mutex			end_mutex;
 	t_mutex			forks[200];
-}	t_data;
+}	t_general;
 
 typedef struct s_philo
 {
@@ -62,7 +61,7 @@ typedef struct s_philo
 	t_mutex			*left_fork;
 	t_mutex			meal_mutex;
 	pthread_t		thread_id;
-	t_data			*data;
+	t_general			*general;
 }	t_philo;
 
 /* utils.c */
@@ -74,26 +73,26 @@ int	ft_atoi(const char *str);
 
 int	p_check_end_condition(t_philo *philo);
 
-int	p_sleep(t_data *data, int time);
+int	p_sleep(t_general *general, int time);
 
 /* start.c */
-int	p_start_philos(t_data *data);
+int	p_start_philos(t_general *general);
 
 /* init.c */
-int	p_init_data(t_data *data, int ac, char **av);
+int	p_init_data(t_general *general, int ac, char **av);
 
-int	p_setup_mutexes(t_data *data);
+int	p_setup_mutexes(t_general *general);
 
-int	p_cleanup_mutexes(t_data *data);
+int	p_cleanup_mutexes(t_general *general);
 
 /* philos.c */
-int	p_init_philos(t_data *data, t_philo *philos);
+int	p_init_philos(t_general *general, t_philo *philos);
 
-int	p_check_end(t_data *data, t_philo *philo, int *finished);
+int	p_check_philo_state(t_general *general, t_philo *philo, int *finished);
 
-int	p_monitor_philos( t_data *data, t_philo *philos);
+int	p_monitor_philos( t_general *general, t_philo *philos);
 
-int	p_finalize_philos(t_data *data, t_philo *philos);
+int	p_finalize_philos(t_general *general, t_philo *philos);
 
 /* actions.c */
 int	p_sleep_action(t_philo *philo);
