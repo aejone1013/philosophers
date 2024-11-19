@@ -6,7 +6,7 @@
 /*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 16:45:57 by jaoh              #+#    #+#             */
-/*   Updated: 2024/11/18 16:43:49 by jaoh             ###   ########.fr       */
+/*   Updated: 2024/11/19 21:39:08 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	p_start_philos(t_data *data)
 		printf("%lld %d died\n", p_get_time() - data->start_time, 1);
 		return (1);
 	}
-	return (0);
 	p_init_philos(data, philos);
 	p_monitor_philos(data, philos);
 	p_finalize_philos(data, philos);

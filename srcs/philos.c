@@ -6,7 +6,7 @@
 /*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 16:46:19 by jaoh              #+#    #+#             */
-/*   Updated: 2024/11/18 16:43:49 by jaoh             ###   ########.fr       */
+/*   Updated: 2024/11/19 21:39:58 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,26 @@ int	p_init_philos(t_data *data, t_philo *philos)
 	return (1);
 }
 
+int	p_finalize_philos(t_data *data, t_philo *philos)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->nb_philo)
+	{
+		if (pthread_join(philos[i].thread_id, NULL) != 0)
+			return (1);
+		i++;
+	}
+	i = 0;
+	while (i < data->nb_philo)
+	{
+		if (pthread_mutex_destroy(&(philos[i].meal_mutex)))
+			return (1);
+		i++;
+	}
+	return (0);
+}
 
 int	p_check_end(t_data *data, t_philo *philo, int *finished)
 {
@@ -87,27 +107,6 @@ int	p_monitor_philos( t_data *data, t_philo *philos)
 			pthread_mutex_unlock(&(data->end_mutex));
 		}
 		usleep(500);
-		i++;
-	}
-	return (0);
-}
-
-int	p_finalize_philos(t_data *data, t_philo *philos)
-{
-	int	i;
-
-	i = 0;
-	while (i < data->nb_philo)
-	{
-		if (pthread_join(philos[i].thread_id, NULL) != 0)
-			return (1);
-		i++;
-	}
-	i = 0;
-	while (i < data->nb_philo)
-	{
-		if (pthread_mutex_destroy(&(philos[i].meal_mutex)))
-			return (1);
 		i++;
 	}
 	return (0);

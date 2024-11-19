@@ -6,7 +6,7 @@
 /*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 16:46:49 by jaoh              #+#    #+#             */
-/*   Updated: 2024/11/18 16:37:00 by jaoh             ###   ########.fr       */
+/*   Updated: 2024/11/18 16:53:49 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	p_think_action(t_philo *philo)
 
 int	p_eat_action(t_philo *philo)
 {
-	p_release_forks(philo);
+	p_grab_forks(philo);
 	p_log_action(philo, EAT);
 	pthread_mutex_lock(&(philo->meal_mutex));
 	philo->last_eaten = p_get_time();

@@ -6,13 +6,13 @@
 /*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 16:46:54 by jaoh              #+#    #+#             */
-/*   Updated: 2024/11/18 16:36:43 by jaoh             ###   ########.fr       */
+/*   Updated: 2024/11/18 16:51:48 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	p_release_forks(t_philo *philo)
+int	p_grab_forks(t_philo *philo)
 {
 	pthread_mutex_lock(philo->left_fork);
 	p_log_action(philo, FORK);

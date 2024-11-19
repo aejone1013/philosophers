@@ -6,7 +6,7 @@
 #    By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/30 19:32:31 by okoca             #+#    #+#              #
-#    Updated: 2024/11/18 16:40:04 by jaoh             ###   ########.fr        #
+#    Updated: 2024/11/19 19:52:44 by jaoh             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,24 +34,24 @@ RESET           =   $(shell echo -e "\033[0m")
 
 NAME = philo
 
-CC			= gcc
+CC				= gcc
 
-INCLUDES_DIR = includes
+INCLUDES_DIR 	= includes
 
-CFLAGS = -Wall -Werror -Wextra -I${INCLUDES_DIR}
+CFLAGS		 	= -Wall -Werror -Wextra -I${INCLUDES_DIR} # -pthread -fsanitize=thread -g
 
-SRC_FILE = main \
-			utils \
-			init \
-			philos \
-			start \
-			actions \
-			log \
-			forks
+SRC_FILE 		= main \
+				utils \
+				init \
+				philos \
+				start \
+				actions \
+				log \
+				forks
 
-SRCS 		= $(addprefix srcs/, $(addsuffix .c, $(SRC_FILE)))
+SRCS 			= $(addprefix srcs/, $(addsuffix .c, $(SRC_FILE)))
 
-OBJS = ${SRCS:.c=.o}
+OBJS 			= ${SRCS:.c=.o}
 
 %.o: %.c
 	@${CC} ${CFLAGS} -c $< -o $@
