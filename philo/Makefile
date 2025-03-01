@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/05/30 19:32:31 by jaoh              #+#    #+#              #
-#    Updated: 2025/01/09 15:27:45 by jaoh             ###   ########.fr        #
+#    Created: 2024/11/13 11:13:03 by jaoh              #+#    #+#              #
+#    Updated: 2025/03/01 11:46:56 by jaoh             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ CC				= gcc
 
 INCLUDES_DIR 	= includes
 
-CFLAGS		 	= -Wall -Werror -Wextra -I${INCLUDES_DIR}
+CFLAGS		 	= -Wall -Werror -Wextra -I${INCLUDES_DIR} # -pthread -fsanitize=thread -g
 
 SRC_FILE 		= main \
 				utils \

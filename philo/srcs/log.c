@@ -6,7 +6,7 @@
 /*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 16:46:36 by jaoh              #+#    #+#             */
-/*   Updated: 2024/11/19 22:36:24 by jaoh             ###   ########.fr       */
+/*   Updated: 2025/03/01 11:47:07 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ int	p_log_action(t_philo *philo, t_action action)
 		end = 1;
 	pthread_mutex_unlock(&(philo->general->end_mutex));
 	if (end != 1)
-		p_print_log_message(p_get_time() - philo->general->start_time, philo->id, action);
+		p_print_log_message(p_get_time() - philo->general
+			->start_time, philo->id, action);
 	pthread_mutex_unlock(&(philo->general->log_mutex));
 	return (0);
 }

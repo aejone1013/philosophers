@@ -6,7 +6,7 @@
 /*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 16:46:11 by jaoh              #+#    #+#             */
-/*   Updated: 2024/11/26 16:06:39 by jaoh             ###   ########.fr       */
+/*   Updated: 2025/03/01 13:08:52 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,56 +61,37 @@ typedef struct s_philo
 	t_mutex			*left_fork;
 	t_mutex			meal_mutex;
 	pthread_t		thread_id;
-	t_general			*general;
+	t_general		*general;
 }	t_philo;
 
 /* utils.c */
 long long	p_get_time(void);
-
-int	p_parse_args(int ac, char **av);
-
-int	ft_atoi(const char *str);
-
-int	p_check_end_condition(t_philo *philo);
-
-int	p_sleep(t_general *general, int time);
-
+int			p_parse_args(int ac, char **av);
+int			ft_atoi(const char *str);
+int			p_check_end_condition(t_philo *philo);
+int			p_sleep(t_general *general, int time);
 /* start.c */
-int	p_start_philos(t_general *general);
-
+int			p_start_philos(t_general *general);
 /* init.c */
-int	p_init_data(t_general *general, int ac, char **av);
-
-int	p_setup_mutexes(t_general *general);
-
-int	p_cleanup_mutexes(t_general *general);
-
+int			p_init_data(t_general *general, int ac, char **av);
+int			p_setup_mutexes(t_general *general);
+int			p_cleanup_mutexes(t_general *general);
 /* philos.c */
-int	p_init_philos(t_general *general, t_philo *philos);
-
-int	p_check_philo_state(t_general *general, t_philo *philo, int *finished);
-
-int	p_monitor_philos( t_general *general, t_philo *philos);
-
-int	p_finalize_philos(t_general *general, t_philo *philos);
-
+int			p_init_philos(t_general *general, t_philo *philos);
+int			p_check_philo_state(t_general *general,
+				t_philo *philo, int *finished);
+int			p_monitor_philos( t_general *general, t_philo *philos);
+int			p_finalize_philos(t_general *general, t_philo *philos);
 /* actions.c */
-int	p_sleep_action(t_philo *philo);
-
-int	p_think_action(t_philo *philo);
-
-int	p_eat_action(t_philo *philo);
-
-void	*p_philo_action(void *arg);
-
+int			p_sleep_action(t_philo *philo);
+int			p_think_action(t_philo *philo);
+int			p_eat_action(t_philo *philo);
+void		*p_philo_action(void *arg);
 /* forks.c */
-int	p_grab_forks(t_philo *philo);
-
-int	p_release_forks(t_philo *philo);
-
+int			p_grab_forks(t_philo *philo);
+int			p_release_forks(t_philo *philo);
 /* log.c */
-int	p_print_log_message(long long start_t, int id, t_action action);
-
-int	p_log_action(t_philo *philo, t_action action);
+int			p_print_log_message(long long start_t, int id, t_action action);
+int			p_log_action(t_philo *philo, t_action action);
 
 #endif

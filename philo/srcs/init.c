@@ -6,7 +6,7 @@
 /*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 16:46:41 by jaoh              #+#    #+#             */
-/*   Updated: 2024/11/19 23:04:23 by jaoh             ###   ########.fr       */
+/*   Updated: 2025/03/01 13:02:52 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ int	p_cleanup_mutexes(t_general *general)
 {
 	int	i;
 
-	i = 0;
 	if (pthread_mutex_destroy(&(general->log_mutex)) != 0)
 		return (0);
 	if (pthread_mutex_destroy(&(general->end_mutex)) != 0)
 		return (0);
+	i = 0;
 	while (i < general->nb_philo)
 	{
 		if (pthread_mutex_destroy(&(general->forks[i])) != 0)
