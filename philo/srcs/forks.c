@@ -6,7 +6,7 @@
 /*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 16:46:54 by jaoh              #+#    #+#             */
-/*   Updated: 2025/03/04 14:07:40 by jaoh             ###   ########.fr       */
+/*   Updated: 2025/03/04 20:13:03 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ int p_grab_forks(t_philo *philo)
     return (0);
 }
 
-int	p_release_forks(t_philo *philo)
+int p_release_forks(t_philo *philo)
 {
-	pthread_mutex_unlock(philo->left_fork);
-	pthread_mutex_unlock(philo->right_fork);
-	return (0);
+    pthread_mutex_unlock(philo->left_fork);
+    pthread_mutex_unlock(philo->right_fork);
+    return (0);
 }
